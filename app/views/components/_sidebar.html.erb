@@ -1,0 +1,22 @@
+<div class="nk-sidebar nk-sidebar-fixed is-dark" data-content="sidebarMenu">
+  <div class="nk-sidebar-element nk-sidebar-head">
+    <div class="nk-sidebar-brand">
+      <%= link_to root_path, class: 'logo-link nk-sidebar-logo' do %>
+        <%= image_tag 'icon_light.png', class: 'logo-light logo-img', alt: 'logo' %>
+        <%= image_tag 'icon_dark.png', class: 'logo-small logo-img logo-img-small', alt: 'logo dark'  %>
+      <% end %>
+    </div>
+    <div class="nk-menu-trigger me-n2">
+      <%= link_to icon_tag('arrow-left'), '#', class: 'nk-nav-toggle nk-quick-nav-icon d-xl-none', 'data-target': 'sidebarMenu' %>
+      <%= link_to icon_tag('menu'), '#', class: 'nk-nav-compact nk-quick-nav-icon d-none d-xl-inline-flex', 'data-target': 'sidebarMenu' %>
+    </div>
+  </div>
+  <div class="nk-sidebar-element">
+    <div class="nk-sidebar-content">
+      <div class="nk-sidebar-menu" data-simplebar>
+        <ul class="nk-menu">
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
