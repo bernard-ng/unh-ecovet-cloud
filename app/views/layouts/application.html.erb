@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="<%= I18n.locale %>">
+<head>
+  <meta charset="utf-8">
+  <meta name="author" content="devscast">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="shortcut icon" href="">
+  <title><%= yield :title %> | Ecovet</title>
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+  <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+  <%= javascript_importmap_tags %>
+  <%= yield :meta_tags %>
+</head>
+<body class="nk-body bg-theme has-sidebar ui-shady">
+<%= render 'components/flash' %>
+<div class="nk-app-root">
+  <div class="nk-main">
+    <% if content_for? :sidebar %>
+      <%= yield :sidebar %>
+    <% else %>
+      <%= render 'components/sidebar' %>
+    <% end %>
+    <div class="nk-wrap">
+      <% if content_for? :navbar %>
+        <%= yield :navbar %>
+      <% else %>
+        <%= render 'components/navbar' %>
+      <% end %>
+      <div class="nk-content">
+        <div class="container-fluid">
+          <div class="nk-content-inner">
+            <% if content_for? :body %>
+              <%= yield :body %>
+            <% else %>
+              <div class="nk-content-body">
+                <div class="mx-auto wide-lg">
+                  <%= yield :header %>
+                  <div class="nk-block">
+                    <%= yield :content %>
+                  </div>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+      <% if content_for? :footer %>
+        <%= yield :footer %>
+      <% else %>
+        <%= render 'components/footer' %>
+      <% end %>
+    </div>
+  </div>
+</div>
+<script data-turbo-track="reload" src=""></script>
+<script data-turbo-track="reload" src=""></script>
+</body>
+</html>

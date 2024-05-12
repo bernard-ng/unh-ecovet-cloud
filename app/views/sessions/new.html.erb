@@ -1,0 +1,27 @@
+<%= content_for :title, 'Connexion' %>
+
+<div class="nk-block-head">
+  <div class="nk-block-head-content">
+    <h5 class="nk-block-title fw-bolder">Connexion</h5>
+    <div class="nk-block-des"><p>Utilisez vos identifiants pour continuer</p></div>
+  </div>
+</div>
+
+<%= bootstrap_form_for(@user, url: :login) do |f| %>
+  <%= f.email_field :email, label: 'Adresse email', class: 'form-control-lg' %>
+
+  <div class="form-group">
+    <div class="form-label-group">
+      <%= f.label 'Mot de passe', for: 'user_password' %>
+      <%= link_to 'Mot de passe oublié ?', new_password_reset_path, class: 'link link-primary link-sm' %>
+    </div>
+    <%= f.password_field :password, hide_label: true, class: 'form-control-lg' %>
+  </div>
+
+  <%= f.submit "Se connecter", class: 'btn btn-lg btn-primary btn-block' %>
+
+  <div class="form-note-s2 pt-4">
+    Vous n'avez pas de compte ? <%= link_to "Créer un compte", :register %>
+  </div>
+
+<% end %>
