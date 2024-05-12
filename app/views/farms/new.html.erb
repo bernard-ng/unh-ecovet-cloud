@@ -1,0 +1,5 @@
+<%= content_for :title, 'Créer une ferme' %>
+
+<%= render :partial => 'components/header', locals: {title: 'Créer une ferme'} %>
+
+<%= render "form", farm: @farm %>

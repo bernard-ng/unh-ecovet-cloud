@@ -1,3 +1,19 @@
 <%= content_for :title, 'Dashboard' %>
 
-<h1>home page</h1>
+<div class="alert alert-pro alert-success alert-dismissible">
+  <div class="alert-text"><h6>Bienvenue sur Ecovet</h6>
+    <p>Plateforme Middleware pour la Prédiction de Maladies Animales Basée sur le Machine Learning</p>
+  </div>
+  <button class="close" data-bs-dismiss="alert"></button>
+</div>
+
+<div class="nk-block">
+  <div class="row g-gs">
+    <div class="col-sm-6">
+      <%= render partial: 'main/stat_card', locals: {title: 'Tous les animaux', count: @animals_count}  %>
+    </div>
+    <div class="col-sm-6">
+      <%= render partial: 'main/stat_card', locals: {title: 'Vos diagnostics', count: @diagnotics_count}  %>
+    </div>
+  </div>
+</div>

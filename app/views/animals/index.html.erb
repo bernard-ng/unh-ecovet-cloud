@@ -1,0 +1,21 @@
+<%= content_for :title, 'Tous les animaux' %>
+
+<%= render :layout => 'components/header', locals: {title: 'Tous les animaux'} do %>
+  <li class="nk-block-tools-opt">
+    <%= link_to new_animal_path, class: 'btn btn-primary' do %>
+      <%= icon_tag 'plus' %>
+      <span>Nouveau</span>
+    <% end %>
+  </li>
+<% end %>
+
+<% if @diagnostics.blank? %>
+  <%= render :partial => 'components/empty_state' %>
+<% else %>
+  <% @animals.each do |animal| %>
+    <%= render animal %>
+    <p>
+      <%= link_to "Show this animal", animal %>
+    </p>
+  <% end %>
+<% end %>

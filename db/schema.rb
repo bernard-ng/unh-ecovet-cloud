@@ -10,7 +10,39 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_05_03_073448) do
+ActiveRecord::Schema[7.1].define(version: 2024_05_11_235742) do
+  create_table "animals", force: :cascade do |t|
+    t.string "name"
+    t.string "race"
+    t.date "birth_at"
+    t.float "weight"
+    t.integer "encoded_race"
+    t.string "gender"
+    t.integer "farm_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["farm_id"], name: "index_animals_on_farm_id"
+  end
+
+  create_table "diagnostics", force: :cascade do |t|
+    t.integer "animal_id", null: false
+    t.string "symptoms"
+    t.string "predictions"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["animal_id"], name: "index_diagnostics_on_animal_id"
+  end
+
+  create_table "farms", force: :cascade do |t|
+    t.string "name"
+    t.string "address"
+    t.float "area"
+    t.integer "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_farms_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "full_name"
     t.string "email", default: "", null: false
@@ -29,4 +61,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_03_073448) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "animals", "farms"
+  add_foreign_key "diagnostics", "animals"
+  add_foreign_key "farms", "users"
 end

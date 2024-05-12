@@ -1,0 +1,19 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  race: MyString
+  birth_at: 2024-05-12
+  weight: 1.5
+  encoded_race: 1
+  gender: MyString
+  farm: one
+
+two:
+  name: MyString
+  race: MyString
+  birth_at: 2024-05-12
+  weight: 1.5
+  encoded_race: 1
+  gender: MyString
+  farm: two

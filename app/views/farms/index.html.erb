@@ -1,0 +1,21 @@
+<%= content_for :title, 'Toutes les fermes' %>
+
+<%= render :layout => 'components/header', locals: {title: 'Toutes les fermes'} do %>
+  <li class="nk-block-tools-opt">
+    <%= link_to new_farm_path, class: 'btn btn-primary' do %>
+      <%= icon_tag 'plus' %>
+      <span>Nouveau</span>
+    <% end %>
+  </li>
+<% end %>
+
+<% if @diagnostics.blank? %>
+  <%= render :partial => 'components/empty_state' %>
+<% else %>
+  <% @farms.each do |farm| %>
+    <%= render farm %>
+    <p>
+      <%= link_to "Show this farm", farm %>
+    </p>
+  <% end %>
+<% end %>

@@ -32,18 +32,16 @@
       <div class="nk-content">
         <div class="container-fluid">
           <div class="nk-content-inner">
-            <% if content_for? :body %>
-              <%= yield :body %>
-            <% else %>
               <div class="nk-content-body">
-                <div class="mx-auto wide-lg">
-                  <%= yield :header %>
+                <div class="wide-md mx-auto">
+                  <% if content_for? :header %>
+                    <%= yield :header %>
+                  <% end %>
                   <div class="nk-block">
-                    <%= yield :content %>
+                    <%= yield %>
                   </div>
                 </div>
               </div>
-            <% end %>
           </div>
         </div>
       </div>
