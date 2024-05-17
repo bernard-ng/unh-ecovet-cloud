@@ -9,10 +9,13 @@
 
 <div class="nk-block">
   <div class="row g-gs">
-    <div class="col-sm-6">
+    <div class="col-sm-4">
+      <%= render partial: 'main/stat_card', locals: {title: 'Vos fermes', count: @farms_count}  %>
+    </div>
+    <div class="col-sm-4">
       <%= render partial: 'main/stat_card', locals: {title: 'Tous les animaux', count: @animals_count}  %>
     </div>
-    <div class="col-sm-6">
+    <div class="col-sm-4">
       <%= render partial: 'main/stat_card', locals: {title: 'Vos diagnostics', count: @diagnotics_count}  %>
     </div>
   </div>

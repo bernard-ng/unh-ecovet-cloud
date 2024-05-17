@@ -1,10 +1,7 @@
-<h1>Editing farm</h1>
+<%= content_for :title, 'Éditer une ferme' %>
+
+<%= render :layout => 'components/header', locals: {title: 'Éditer une ferme'} do %>
+  <%= header_link_tag farm_path(@farm), 'Détails', 'eye'  %>
+<% end %>
 
 <%= render "form", farm: @farm %>
-
-<br>
-
-<div>
-  <%= link_to "Show this farm", @farm %> |
-  <%= link_to "Back to farms", farms_path %>
-</div>

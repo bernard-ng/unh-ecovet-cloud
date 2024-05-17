@@ -9,13 +9,43 @@
   </li>
 <% end %>
 
-<% if @diagnostics.blank? %>
+<% if @farms.blank? %>
   <%= render :partial => 'components/empty_state' %>
 <% else %>
-  <% @farms.each do |farm| %>
-    <%= render farm %>
-    <p>
-      <%= link_to "Show this farm", farm %>
-    </p>
-  <% end %>
+  <div class="card card-preview">
+    <table class="table table-tranx">
+      <thead>
+      <tr class="tb-tnx-head">
+        <th>#</th>
+        <th>Nom</th>
+        <th>Adresse</th>
+        <th>Superficie</th>
+        <th class="tb-tnx-action">
+          <span>&nbsp;</span>
+        </th>
+      </tr>
+      </thead>
+      <tbody>
+        <% @farms.each do |farm| %>
+          <tr class="tb-tnx-item">
+            <td><%= link_to farm.id, farm %></td>
+            <td><%= farm.name %></td>
+            <td><%= farm.address %></td>
+            <td><%= farm.area %> KM<sup>2</sup></td>
+            <td class="tb-tnx-action">
+              <div class="dropdown">
+                <a class="text-soft dropdown-toggle btn btn-icon btn-trigger" data-bs-toggle="dropdown" aria-expanded="false"><em class="icon ni ni-more-h"></em></a>
+                <div class="dropdown-menu dropdown-menu-end dropdown-menu-xs" style="">
+                  <ul class="link-list-plain">
+                    <li><%= link_to "Voir", farm %></li>
+                    <li><%= link_to "Éditer", edit_farm_path(farm) %></li>
+                  </ul>
+                </div>
+              </div>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
 <% end %>

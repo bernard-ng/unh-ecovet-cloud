@@ -1,18 +1,15 @@
-
-<turbo-frame id="form-modal-frame">
-  <div class="card">
-    <div class="card-inner">
-      <%= bootstrap_form_for(farm, url: new_farm_path) do |f| %>
-        <% farm.errors.each do |error| %>
-          <div data-controller="flash" data-type="error" data-message="<%= error.full_message %>" data-timer="5000"></div>
-        <% end %>
-
-        <%= f.email_field :name, label: 'Nom', class: 'form-control-lg' %>
-        <%= f.text_field :address, label: 'Address', class: 'form-control-lg' %>
-        <%= f.number_field :area, label: 'Superficie', class: 'form-control-lg' %>
-
-        <%= f.submit "Créer", class: 'mt-3 btn btn-primary' %>
+<div class="card">
+  <div class="card-inner">
+    <%= bootstrap_form_for(farm, url: farms_path) do |f| %>
+      <% farm.errors.each do |error| %>
+        <div data-controller="flash" data-type="error" data-message="<%= error.full_message %>" data-timer="5000"></div>
       <% end %>
-    </div>
+
+      <%= f.text_field :name, label: 'Nom', class: 'form-control-lg' %>
+      <%= f.text_field :address, label: 'Address', class: 'form-control-lg' %>
+      <%= f.number_field :area, label: 'Superficie', class: 'form-control-lg' %>
+
+      <%= f.submit "Créer", class: 'mt-3 btn btn-primary' %>
+    <% end %>
   </div>
-</turbo-frame>
+</div>

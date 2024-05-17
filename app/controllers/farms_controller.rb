@@ -3,7 +3,7 @@ class FarmsController < ApplicationController
   before_action :set_farm, only: %i[ show edit update destroy ]
 
   def index
-    @farms = Farm.all
+    @farms = Farm.where(user_id: current_user.id)
   end
 
   def show
@@ -11,7 +11,6 @@ class FarmsController < ApplicationController
 
   def new
     @farm = Farm.new
-    @farm.user = current_user
   end
 
   def edit
@@ -19,9 +18,10 @@ class FarmsController < ApplicationController
 
   def create
     @farm = Farm.new(farm_params)
+    @farm.user = current_user
 
     if @farm.save
-      redirect_to farm_url(@farm), notice: "Farm was successfully created."
+      redirect_to farms_url, notice: "Farm was successfully created."
     else
       render :new, status: :unprocessable_entity
     end
@@ -47,6 +47,6 @@ class FarmsController < ApplicationController
     end
 
     def farm_params
-      params.fetch(:farm, :name, :address, :area)
+      params.require(:farm).permit(:name, :address, :area)
     end
 end
