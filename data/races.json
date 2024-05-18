@@ -1,0 +1,8 @@
+{
+  "cattle": 0,
+  "cheep": 1,
+  "goat": 2,
+  "pig": 3,
+  "poultry_disease": 4,
+  "rabbit": 5
+}
