@@ -1,6 +1,6 @@
 <div class="card">
   <div class="card-inner">
-    <%= bootstrap_form_for(farm, url: farms_path) do |f| %>
+    <%= bootstrap_form_for(farm, url: farm.id.nil? ? farms_path : farm_path(farm) ) do |f| %>
       <% farm.errors.each do |error| %>
         <div data-controller="flash" data-type="error" data-message="<%= error.full_message %>" data-timer="5000"></div>
       <% end %>

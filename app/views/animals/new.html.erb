@@ -1,9 +1,4 @@
-<h1>New animal</h1>
+<%= content_for :title, 'Ajouter un animal' %>
 
+<%= render :partial => 'components/header', locals: {title: 'Ajouter un animal'} %>
 <%= render "form", animal: @animal %>
-
-<br>
-
-<div>
-  <%= link_to "Back to animals", animals_path %>
-</div>

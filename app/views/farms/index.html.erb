@@ -1,12 +1,7 @@
 <%= content_for :title, 'Toutes les fermes' %>
 
 <%= render :layout => 'components/header', locals: {title: 'Toutes les fermes'} do %>
-  <li class="nk-block-tools-opt">
-    <%= link_to new_farm_path, class: 'btn btn-primary' do %>
-      <%= icon_tag 'plus' %>
-      <span>Nouveau</span>
-    <% end %>
-  </li>
+  <%= header_link_tag new_farm_path, 'Nouveau', 'plus'  %>
 <% end %>
 
 <% if @farms.blank? %>
@@ -33,15 +28,7 @@
             <td><%= farm.address %></td>
             <td><%= farm.area %> KM<sup>2</sup></td>
             <td class="tb-tnx-action">
-              <div class="dropdown">
-                <a class="text-soft dropdown-toggle btn btn-icon btn-trigger" data-bs-toggle="dropdown" aria-expanded="false"><em class="icon ni ni-more-h"></em></a>
-                <div class="dropdown-menu dropdown-menu-end dropdown-menu-xs" style="">
-                  <ul class="link-list-plain">
-                    <li><%= link_to "Voir", farm %></li>
-                    <li><%= link_to "Éditer", edit_farm_path(farm) %></li>
-                  </ul>
-                </div>
-              </div>
+              <%= link_to icon_tag("eye"), farm, class: 'text-soft btn btn-icon btn-trigger' %>
             </td>
           </tr>
         <% end %>

@@ -1,10 +1,7 @@
-<p style="color: green"><%= notice %></p>
+<%= content_for :title, "Ferme #{@farm.name}" %>
+
+<%= render :layout => 'components/header', locals: {title: "Ferme #{@farm.name}"} do %>
+  <%= header_link_tag edit_farm_path(@farm), 'Modifier', 'edit'  %>
+<% end %>
 
 <%= render @farm %>
-
-<div>
-  <%= link_to "Edit this farm", edit_farm_path(@farm) %> |
-  <%= link_to "Back to farms", farms_path %>
-
-  <%= button_to "Destroy this farm", @farm, method: :delete %>
-</div>

@@ -2,8 +2,8 @@
   <div class="nk-sidebar-element nk-sidebar-head">
     <div class="nk-sidebar-brand">
       <%= link_to root_path, class: 'logo-link nk-sidebar-logo' do %>
-        <%= image_tag 'icon_light.png', class: 'logo-light logo-img', alt: 'logo' %>
-        <%= image_tag 'icon_dark.png', class: 'logo-small logo-img logo-img-small', alt: 'logo dark'  %>
+        <%= image_tag 'logo_light.png', class: 'logo-light logo-img', alt: 'logo' %>
+        <%= image_tag 'logo_dark.png', class: 'logo-small logo-img logo-img-small', alt: 'logo dark'  %>
       <% end %>
     </div>
     <div class="nk-menu-trigger me-n2">
@@ -15,12 +15,6 @@
     <div class="nk-sidebar-content">
       <div class="nk-sidebar-menu" data-simplebar>
         <ul class="nk-menu">
-<!--          <li class="nk-menu-item">-->
-            <%#= link_to root_path, class: 'nk-menu-link' do %>
-<!--              <span class="nk-menu-icon"><%#= icon_tag 'home' %></span>-->
-<!--              <span class="nk-menu-text">Dashboard</span>-->
-            <%# end %>
-<!--          </li>-->
           <li class="nk-menu-item">
             <%= link_to farms_path, class: 'nk-menu-link' do %>
               <span class="nk-menu-icon"><%= icon_tag 'activity-round' %></span>

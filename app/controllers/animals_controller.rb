@@ -11,6 +11,7 @@ class AnimalsController < ApplicationController
 
   def new
     @animal = Animal.new
+    @farms = Farm.where(user_id: current_user.id)
   end
 
   def edit
@@ -42,10 +43,10 @@ class AnimalsController < ApplicationController
 
   private
     def set_animal
-      @animal = Animal.find(params[:id])
+      @animal = Animal.with_user.find(params[:id])
     end
 
     def animal_params
-      params.fetch(:animal, {})
+      params.require(:animal).permit(:name, :race, :gender, :picture, :weight, :birth_at, :farm)
     end
 end
