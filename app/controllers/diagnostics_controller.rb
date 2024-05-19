@@ -1,51 +1,29 @@
 class DiagnosticsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_diagnostic, only: %i[ show edit update destroy ]
 
   def index
-    @diagnostics = Diagnostic.all
-  end
-
-  def show
+    @diagnostics = Diagnostic.belonging_to_user(current_user.id)
   end
 
   def new
     @diagnostic = Diagnostic.new
-  end
-
-  def edit
+    @animals = Animal.belonging_to_user(current_user.id)
+    @symptoms = json_collection :symptoms
   end
 
   def create
     @diagnostic = Diagnostic.new(diagnostic_params)
+    @diagnostic.symptoms = diagnostic_params[:symptoms].reject! { |d| d.empty? }.join(", ")
 
     if @diagnostic.save
-      redirect_to diagnostic_url(@diagnostic), notice: "Diagnostic was successfully created."
+      redirect_to diagnostics_url, notice: "Diagnostic was successfully created."
     else
       render :new, status: :unprocessable_entity
     end
   end
 
-  def update
-    if @diagnostic.update(diagnostic_params)
-      redirect_to diagnostic_url(@diagnostic), notice: "Diagnostic was successfully updated."
-    else
-      render :edit, status: :unprocessable_entity
-    end
-  end
-
-  def destroy
-    @diagnostic.destroy!
-
-    redirect_to diagnostics_url, notice: "Diagnostic was successfully destroyed."
-  end
-
   private
-    def set_diagnostic
-      @diagnostic = Diagnostic.find(params[:id])
-    end
-
     def diagnostic_params
-      params.fetch(:diagnostic, {})
+      params.require(:diagnostic).permit(:animal_id, :symptoms => [])
     end
 end

@@ -11,7 +11,9 @@
   <%= csp_meta_tag %>
 
   <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-  <%= javascript_include_tag "application", "data-turbo-track": "reload" %>
+  <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: "defer" %>
+  <%= javascript_include_tag "/javascripts/bundle.js", "data-turbo-track": 'reload', defer: "defer" %>
+  <%= javascript_include_tag "/javascripts/scripts.js", "data-turbo-track": 'reload', defer: "defer" %>
   <%= yield :meta_tags %>
 </head>
 <body class="nk-body bg-theme has-sidebar ui-shady">
@@ -53,8 +55,5 @@
     </div>
   </div>
 </div>
-
-<%= javascript_include_tag "/javascripts/bundle.js", "data-turbo-track": 'reload' %>
-<%= javascript_include_tag "/javascripts/scripts.js", "data-turbo-track": 'reload' %>
 </body>
 </html>

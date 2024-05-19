@@ -44,6 +44,10 @@ class FarmsController < ApplicationController
   private
     def set_farm
       @farm = Farm.find(params[:id])
+
+      unless @farm.user_id.equal? current_user.id
+        redirect_to farms_url, alert: "You don't have permission to view this farm"
+      end
     end
 
     def farm_params

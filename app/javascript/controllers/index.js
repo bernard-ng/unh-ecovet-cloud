@@ -5,5 +5,7 @@
 import { application } from "./application"
 
 import FlashController from "./flash_controller"
+import SelectController from "./select_controller";
 
 application.register("flash", FlashController)
+application.register('select', SelectController)

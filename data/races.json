@@ -1,8 +1,8 @@
-{
-  "cattle": 0,
-  "cheep": 1,
-  "goat": 2,
-  "pig": 3,
-  "poultry_disease": 4,
-  "rabbit": 5
-}
+[
+  {"id": 0, "name": "cattle"},
+  {"id": 1, "name": "cheep"},
+  {"id": 2, "name": "goat"},
+  {"id": 3, "name": "pig"},
+  {"id": 4, "name": "poultry_disease"},
+  {"id": 5, "name": "rabbit"}
+]

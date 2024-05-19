@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :diagnostics
+  resources :diagnostics, only: [:index, :new, :create]
   resources :animals
   resources :farms
   devise_for :users

@@ -1,1 +1,41 @@
+<%= content_for :title, "Animal #{@animal.name}" %>
+
+<%= render :layout => 'components/header', locals: {title: "Animal ##{@animal.id}"} do %>
+  <%= header_link_tag new_diagnostic_path, 'Diagnostiquer', 'notify'  %>
+  <%= header_link_tag edit_animal_path(@animal), 'Modifier', 'edit'  %>
+<% end %>
+
 <%= render @animal %>
+
+<div class="card mt-4">
+  <div class="card-content">
+    <div class="card-inner">
+      <div class="nk-block-head">
+        <h5 class="title">Diagnostiques récents</h5>
+      </div>
+    </div>
+
+    <% if @diagnostics.empty? %>
+      <%= render :partial => 'components/empty_state' %>
+    <% else %>
+      <table class="table table-tranx">
+        <thead>
+        <tr class="tb-tnx-head">
+          <th>Date</th>
+          <th>Symptômes</th>
+          <th>Prédictions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <% @diagnostics.each do |diagnostic| %>
+          <tr class="tb-tnx-item">
+            <td><%= diagnostic.created_at %></td>
+            <td><%= diagnostic.symptoms %></td>
+            <td><%= diagnostic.predictions %></td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+    <% end %>
+  </div>
+</div>
