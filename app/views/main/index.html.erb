@@ -16,7 +16,37 @@
       <%= render partial: 'main/stat_card', locals: {title: 'Tous les animaux', count: @animals_count}  %>
     </div>
     <div class="col-sm-4">
-      <%= render partial: 'main/stat_card', locals: {title: 'Vos diagnostics', count: @diagnotics_count}  %>
+      <%= render partial: 'main/stat_card', locals: {title: 'Vos diagnostics', count: @diagnostics_count}  %>
     </div>
   </div>
 </div>
+
+<% if @diagnostics.blank? %>
+  <%= render :partial => 'components/empty_state' %>
+<% else %>
+  <div class="nk-block-head mt-4">
+    <h5 class="title">Diagnostiques récents</h5>
+  </div>
+  <div class="card card-preview">
+    <table class="table table-tranx">
+      <thead>
+      <tr class="tb-tnx-head">
+        <th>Animal</th>
+        <th>Race</th>
+        <th>Symptômes</th>
+        <th>Prédictions</th>
+      </tr>
+      </thead>
+      <tbody>
+      <% @diagnostics.each do |diagnostic| %>
+        <tr class="tb-tnx-item">
+          <td><%= link_to "Animal ##{diagnostic.animal.id}", diagnostic.animal %></td>
+          <td><span class="badge badge-dim badge-sm bg-primary"><%= diagnostic.animal.race %></span></td>
+          <td><%= diagnostic.symptoms %></td>
+          <td><%= diagnostic.predictions %></td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+<% end %>

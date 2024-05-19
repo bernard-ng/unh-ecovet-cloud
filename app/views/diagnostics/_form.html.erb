@@ -6,7 +6,7 @@
       <% end %>
 
       <%= f.collection_select :animal_id, @animals, :id, :name, label: 'Animal', class: 'form-control-lg' %>
-      <%= f.collection_select :symptoms, @symptoms, :name, :id, multiple: true, label: 'Symptômes', class: 'form-control-lg' %>
+      <%= f.collection_select :symptoms, @symptoms, :id, :name, multiple: true, label: 'Symptômes', class: 'form-control-lg' %>
 
       <%= f.submit "Soumettre", class: 'mt-3 btn btn-primary' %>
     <% end %>

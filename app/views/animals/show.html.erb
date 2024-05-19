@@ -7,14 +7,11 @@
 
 <%= render @animal %>
 
-<div class="card mt-4">
+<div class="nk-block-head mt-4">
+  <h5 class="title">Diagnostiques récents</h5>
+</div>
+<div class="card ">
   <div class="card-content">
-    <div class="card-inner">
-      <div class="nk-block-head">
-        <h5 class="title">Diagnostiques récents</h5>
-      </div>
-    </div>
-
     <% if @diagnostics.empty? %>
       <%= render :partial => 'components/empty_state' %>
     <% else %>
