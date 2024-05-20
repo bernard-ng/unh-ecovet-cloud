@@ -18,6 +18,7 @@ gem "tzinfo-data", platforms: %i[ windows jruby ]
 gem "bootsnap", require: false
 gem "image_processing", "~> 1.2"
 
+gem 'httparty'
 gem "bootstrap_form", "~> 5.4"
 gem "devise", "~> 4.9"
 
