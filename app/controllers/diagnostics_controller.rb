@@ -24,7 +24,7 @@ class DiagnosticsController < ApplicationController
 
       request = { :features => symptoms }
       response = HTTParty.post('http://localhost:5000/predict',
-        body: JSON.generate request,
+        body: JSON.generate(request),
         headers: { 'Content-Type' => 'application/json' }
       )
       predictions = JSON.parse(response.body)['predictions']
