@@ -1,45 +1,47 @@
-require "test_helper"
+# frozen_string_literal: true
+
+require 'test_helper'
 
 class DiagnosticsControllerTest < ActionDispatch::IntegrationTest
   setup do
     @diagnostic = diagnostics(:one)
   end
 
-  test "should get index" do
+  test 'should get index' do
     get diagnostics_url
     assert_response :success
   end
 
-  test "should get new" do
+  test 'should get new' do
     get new_diagnostic_url
     assert_response :success
   end
 
-  test "should create diagnostic" do
-    assert_difference("Diagnostic.count") do
-      post diagnostics_url, params: { diagnostic: {  } }
+  test 'should create diagnostic' do
+    assert_difference('Diagnostic.count') do
+      post diagnostics_url, params: { diagnostic: {} }
     end
 
     assert_redirected_to diagnostic_url(Diagnostic.last)
   end
 
-  test "should show diagnostic" do
+  test 'should show diagnostic' do
     get diagnostic_url(@diagnostic)
     assert_response :success
   end
 
-  test "should get edit" do
+  test 'should get edit' do
     get edit_diagnostic_url(@diagnostic)
     assert_response :success
   end
 
-  test "should update diagnostic" do
-    patch diagnostic_url(@diagnostic), params: { diagnostic: {  } }
+  test 'should update diagnostic' do
+    patch diagnostic_url(@diagnostic), params: { diagnostic: {} }
     assert_redirected_to diagnostic_url(@diagnostic)
   end
 
-  test "should destroy diagnostic" do
-    assert_difference("Diagnostic.count", -1) do
+  test 'should destroy diagnostic' do
+    assert_difference('Diagnostic.count', -1) do
       delete diagnostic_url(@diagnostic)
     end
 

@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 class AnimalsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_animal, only: %i[ show edit update destroy ]
+  before_action :set_animal, only: %i[show edit update destroy]
 
   def index
     @animals = Animal.belonging_to_user(current_user.id)
@@ -16,15 +18,14 @@ class AnimalsController < ApplicationController
     @races = json_collection :races
   end
 
-  def edit
-  end
+  def edit; end
 
   def create
     @animal = Animal.new(animal_params)
-    @animal.encoded_race = json_collection(:races).select {|r| r.name == animal_params[:race]}.first.id
+    @animal.encoded_race = json_collection(:races).select { |r| r.name == animal_params[:race] }.first.id
 
     if @animal.save
-      redirect_to animal_url(@animal), notice: "Animal was successfully created."
+      redirect_to animal_url(@animal), notice: 'Animal was successfully created.'
     else
       render :new, status: :unprocessable_entity
     end
@@ -32,7 +33,7 @@ class AnimalsController < ApplicationController
 
   def update
     if @animal.update(animal_params)
-      redirect_to animal_url(@animal), notice: "Animal was successfully updated."
+      redirect_to animal_url(@animal), notice: 'Animal was successfully updated.'
     else
       render :edit, status: :unprocessable_entity
     end
@@ -41,15 +42,16 @@ class AnimalsController < ApplicationController
   def destroy
     @animal.destroy!
 
-    redirect_to animals_url, notice: "Animal was successfully destroyed."
+    redirect_to animals_url, notice: 'Animal was successfully destroyed.'
   end
 
   private
-    def set_animal
-      @animal = Animal.find(params[:id])
-    end
 
-    def animal_params
-      params.require(:animal).permit(:name, :race, :gender, :picture, :weight, :birth_at, :farm_id)
-    end
+  def set_animal
+    @animal = Animal.find(params[:id])
+  end
+
+  def animal_params
+    params.require(:animal).permit(:name, :race, :gender, :picture, :weight, :birth_at, :farm_id)
+  end
 end

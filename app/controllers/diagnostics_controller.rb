@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'httparty'
 
 class DiagnosticsController < ApplicationController
@@ -15,31 +17,48 @@ class DiagnosticsController < ApplicationController
 
   def create
     @diagnostic = Diagnostic.new(diagnostic_params)
-    @diagnostic.symptoms = diagnostic_params[:symptoms].reject! { |d| d.empty? }.join(", ")
+    @diagnostic.symptoms = clean_symptoms(diagnostic_params[:symptoms])
 
     if @diagnostic.save
-      symptoms = @diagnostic.symptoms.split(',').map(&:strip).map(&:to_i)
-      symptoms.prepend @diagnostic.animal.encoded_race
-      symptoms += [118] * (7 - symptoms.size) if symptoms.size < 7
+      predictions = fetch_predictions(@diagnostic)
+      @diagnostic.update(predictions:)
 
-      request = { :features => symptoms }
-      response = HTTParty.post('http://localhost:5000/predict',
-        body: JSON.generate(request),
-        headers: { 'Content-Type' => 'application/json' }
-      )
-      predictions = JSON.parse(response.body)['predictions']
-
-      @diagnostic.predictions = "#{predictions['lgbm']}, #{predictions['xgb']}"
-      @diagnostic.save
-
-      redirect_to diagnostics_url, notice: "Diagnostic was successfully created."
+      redirect_to diagnostics_url, notice: 'Diagnostic was successfully created.'
     else
       render :new, status: :unprocessable_entity
     end
   end
 
   private
-    def diagnostic_params
-      params.require(:diagnostic).permit(:animal_id, :symptoms => [])
-    end
+
+  def clean_symptoms(symptoms)
+    symptoms.reject(&:empty?).join(', ')
+  end
+
+  def fetch_predictions(diagnostic)
+    symptoms = prepare_symptoms(diagnostic)
+    request = { features: symptoms }
+    response = HTTParty.post(
+      'http://localhost:5000/predict',
+      body: JSON.generate(request),
+      headers: { 'Content-Type' => 'application/json' }
+    )
+    parse_predictions(response)
+  end
+
+  def prepare_symptoms(diagnostic)
+    symptoms = diagnostic.symptoms.split(',').map(&:strip).map(&:to_i)
+    symptoms.prepend diagnostic.animal.encoded_race
+    symptoms.fill(118, symptoms.size, 7 - symptoms.size) if symptoms.size < 7
+    symptoms
+  end
+
+  def parse_predictions(response)
+    predictions = JSON.parse(response.body)['predictions']
+    "#{predictions['lgbm']}, #{predictions['xgb']}"
+  end
+
+  def diagnostic_params
+    params.require(:diagnostic).permit(:animal_id, symptoms: [])
+  end
 end
