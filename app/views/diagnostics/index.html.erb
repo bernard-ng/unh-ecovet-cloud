@@ -1,32 +1,13 @@
 <%= content_for :title, 'Tous les diagnostics' %>
 
-<%= render :layout => 'components/header', locals: {title: 'Tous les diagnostics'} do %>
+<%= render layout: 'components/header', locals: {title: 'Tous les diagnostics'} do %>
   <%= header_link_tag new_diagnostic_path, 'Nouveau', 'plus' %>
 <% end %>
 
 <% if @diagnostics.blank? %>
-  <%= render :partial => 'components/empty_state' %>
+  <%= render partial: 'components/empty_state' %>
 <% else %>
   <div class="card card-preview">
-    <table class="table table-tranx">
-      <thead>
-      <tr class="tb-tnx-head">
-        <th>Animal</th>
-        <th>Race</th>
-        <th>Symptômes</th>
-        <th>Prédictions</th>
-      </tr>
-      </thead>
-      <tbody>
-      <% @diagnostics.each do |diagnostic| %>
-        <tr class="tb-tnx-item">
-          <td><%= link_to "Animal ##{diagnostic.animal.id}", diagnostic.animal %></td>
-          <td><span class="badge badge-dim badge-sm bg-primary"><%= diagnostic.animal.race %></span></td>
-          <td><%= diagnostic.symptoms %></td>
-          <td><%= diagnostic.predictions %></td>
-        </tr>
-      <% end %>
-      </tbody>
-    </table>
+    <%= render partial: 'diagnostics/diagnostics', locals: {diagnostics: @diagnostics} %>
   </div>
 <% end %>

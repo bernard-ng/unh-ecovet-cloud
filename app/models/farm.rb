@@ -2,7 +2,7 @@
 
 class Farm < ApplicationRecord
   belongs_to :user
-  has_many :animals, inverse_of: :farm
+  has_many :animals, inverse_of: :farm, dependent: :delete_all
 
   validates :name, :address, :area, :user, presence: true
 

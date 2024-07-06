@@ -11,7 +11,7 @@
               <div class="profile-ud wider">
                 <span class="profile-ud-label">Photo</span>
                 <span class="profile-ud-value">
-                  <%= image_tag animal.picture.variant(:thumb), width: 100, height: 100 %>
+                  <%= image_tag animal.picture.attached? ? animal.picture.variant(:thumb) : '/images/default.png', width: 80, height: 80 %>
                 </span>
               </div>
             </div>

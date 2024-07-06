@@ -22,6 +22,8 @@ gem 'tzinfo-data', platforms: %i[windows jruby]
 
 gem 'bootstrap_form', '~> 5.4'
 gem 'devise', '~> 4.9'
+gem 'dotenv-rails', groups: %i[development test production]
+gem 'faker'
 gem 'httparty'
 
 group :development, :test do

@@ -4,6 +4,7 @@ require 'httparty'
 
 class DiagnosticsController < ApplicationController
   before_action :authenticate_user!
+  before_action :set_diagnostic, only: [:destroy]
 
   def index
     @diagnostics = Diagnostic.belonging_to_user(current_user.id)
@@ -17,7 +18,7 @@ class DiagnosticsController < ApplicationController
 
   def create
     @diagnostic = Diagnostic.new(diagnostic_params)
-    @diagnostic.symptoms = clean_symptoms(diagnostic_params[:symptoms])
+    @diagnostic.symptoms = diagnostic_params[:symptoms].reject(&:empty?).join(', ')
 
     if @diagnostic.save
       predictions = fetch_predictions(@diagnostic)
@@ -29,21 +30,25 @@ class DiagnosticsController < ApplicationController
     end
   end
 
-  private
+  def destroy
+    @diagnostic.destroy!
 
-  def clean_symptoms(symptoms)
-    symptoms.reject(&:empty?).join(', ')
+    redirect_to diagnostics_url, notice: 'Diagnostic was successfully destroyed.'
   end
+
+  private
 
   def fetch_predictions(diagnostic)
     symptoms = prepare_symptoms(diagnostic)
     request = { features: symptoms }
     response = HTTParty.post(
-      'http://localhost:5000/predict',
+      ENV.fetch('PREDICTION_MODEL_URL', 'http://localhost:5000/predit'),
       body: JSON.generate(request),
       headers: { 'Content-Type' => 'application/json' }
     )
-    parse_predictions(response)
+
+    predictions = JSON.parse(response.body)['predictions']
+    "#{predictions['lgbm']}, #{predictions['xgb']}"
   end
 
   def prepare_symptoms(diagnostic)
@@ -53,9 +58,8 @@ class DiagnosticsController < ApplicationController
     symptoms
   end
 
-  def parse_predictions(response)
-    predictions = JSON.parse(response.body)['predictions']
-    "#{predictions['lgbm']}, #{predictions['xgb']}"
+  def set_diagnostic
+    @diagnostic = Diagnostic.find(params[:id])
   end
 
   def diagnostic_params

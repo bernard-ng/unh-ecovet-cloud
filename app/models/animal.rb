@@ -2,6 +2,7 @@
 
 class Animal < ApplicationRecord
   belongs_to :farm
+  has_many :diagnostics, dependent: :delete_all
   has_one_attached :picture do |attachable|
     attachable.variant :thumb, resize_to_limit: [200, 200], preprocess: false
   end

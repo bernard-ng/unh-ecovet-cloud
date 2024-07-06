@@ -4,5 +4,6 @@
   {"id": 2, "name": "goat"},
   {"id": 3, "name": "pig"},
   {"id": 4, "name": "poultry_disease"},
+  {"id": 4, "name": "chicken"},
   {"id": 5, "name": "rabbit"}
 ]

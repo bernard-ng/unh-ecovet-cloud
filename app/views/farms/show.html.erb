@@ -2,6 +2,12 @@
 
 <%= render :layout => 'components/header', locals: {title: "Ferme #{@farm.name}"} do %>
   <%= header_link_tag edit_farm_path(@farm), 'Modifier', 'edit'  %>
+  <li class='nk-block-tools-opt'>
+    <%= link_to farm_path(@farm), class: 'btn btn-danger', data: {turbo_method: :delete, turbo_confirm: 'êtes vous sûre ?'} do %>
+      <%= icon_tag 'trash' %>
+      <span>Supprimer</span>
+    <% end %>
+  </li>
 <% end %>
 
 <%= render @farm %>

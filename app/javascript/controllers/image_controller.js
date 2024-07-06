@@ -16,15 +16,16 @@ export default class ImageController extends Controller
             data.append('file', file);
 
             try {
-                const response = await fetch('http://localhost:5000/detect', {
+                const url = document.head.querySelector(`meta[name="detection_model_url"]`).content
+                const response = await fetch(url, {
                     method: 'POST',
                     body: data
                 });
 
                 if (response.ok) {
-                    const response = await response.json();
-                    await toast('success', `Animal détecté : ${response['detection']}`, 5000)
-                   document.querySelector("#animal_race").value = response['detection']
+                    const data = await response.json();
+                    await toast('success', `Animal détecté : ${data['detection']}`, 5000)
+                   document.querySelector("#animal_race").value = data['detection']
                 } else {
                    await toast('error', "Désolé une erreur s'est produite lors de la détection", 5000)
                 }

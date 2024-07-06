@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  resources :diagnostics, only: %i[index new create]
+  resources :diagnostics, only: %i[index new create destroy]
   resources :animals
   resources :farms
   devise_for :users

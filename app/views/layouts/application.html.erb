@@ -14,6 +14,7 @@
   <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: "defer" %>
   <%= javascript_include_tag "/javascripts/bundle.js", "data-turbo-track": 'reload', defer: "defer" %>
   <%= javascript_include_tag "/javascripts/scripts.js", "data-turbo-track": 'reload', defer: "defer" %>
+  <%= tag :meta, name: :detection_model_url, content: ENV.fetch('DETECTION_MODEL_URL', 'http://localhost:5000/detect') %>
   <%= yield :meta_tags %>
 </head>
 <body class="nk-body bg-theme has-sidebar ui-shady">

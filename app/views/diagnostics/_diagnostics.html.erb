@@ -1,0 +1,40 @@
+<table class="table table-tranx">
+  <thead>
+  <tr class="tb-tnx-head">
+    <th>Animal</th>
+    <th>Race</th>
+    <th>Symptômes</th>
+    <th>Prédictions</th>
+    <th class="tb-tnx-action">
+      <span>&nbsp;</span>
+    </th>
+  </tr>
+  </thead>
+  <tbody>
+  <% diagnostics.each do |diagnostic| %>
+    <tr class="tb-tnx-item">
+      <td><%= link_to "Animal ##{diagnostic.animal.id}", diagnostic.animal %></td>
+      <td><span class="badge badge-dim badge-sm bg-primary"><%= diagnostic.animal.race %></span></td>
+      <td>
+        <ul>
+          <% encoding_names('symptoms', diagnostic.symptoms).each do |symptom| %>
+            <li><%= symptom %></li>
+          <% end %>
+        </ul>
+      </td>
+      <td>
+        <ul>
+          <% diagnostic.predictions.split(', ').each do |prediction| %>
+            <li><%= prediction %></li>
+          <% end %>
+        </ul>
+      </td>
+      <td class="tb-tnx-action">
+        <%= link_to diagnostic, class: 'text-soft btn btn-icon btn-trigger', data: {turbo_method: :delete, turbo_confirm: 'êtes vous sûre ?'} do %>
+          <%= icon_tag 'trash' %>
+        <% end %>
+      </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>

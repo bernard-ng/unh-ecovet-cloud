@@ -3,6 +3,7 @@
 class AnimalsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_animal, only: %i[show edit update destroy]
+  before_action :set_farms, only: %i[new edit]
 
   def index
     @animals = Animal.belonging_to_user(current_user.id)
@@ -14,7 +15,6 @@ class AnimalsController < ApplicationController
 
   def new
     @animal = Animal.new
-    @farms = Farm.where(user_id: current_user.id)
     @races = json_collection :races
   end
 
@@ -23,6 +23,7 @@ class AnimalsController < ApplicationController
   def create
     @animal = Animal.new(animal_params)
     @animal.encoded_race = json_collection(:races).select { |r| r.name == animal_params[:race] }.first.id
+    puts @animal.inspect
 
     if @animal.save
       redirect_to animal_url(@animal), notice: 'Animal was successfully created.'
@@ -49,6 +50,10 @@ class AnimalsController < ApplicationController
 
   def set_animal
     @animal = Animal.find(params[:id])
+  end
+
+  def set_farms
+    @farms = Farm.where(user_id: current_user.id)
   end
 
   def animal_params
