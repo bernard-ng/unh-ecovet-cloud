@@ -33,7 +33,7 @@ end
 
 group :development do
   gem 'capistrano'
-  gem 'capistrano3-puma'
+  gem 'capistrano3-puma', '6.0.0.beta.1'
   gem 'capistrano-rails'
   gem 'capistrano-rvm'
   gem 'spring'
