@@ -32,12 +32,12 @@ group :development, :test do
 end
 
 group :development do
-  gem 'spring'
-  gem 'web-console'
   gem 'capistrano'
+  gem 'capistrano3-puma'
   gem 'capistrano-rails'
   gem 'capistrano-rvm'
-  gem 'capistrano3-puma'
+  gem 'spring'
+  gem 'web-console'
 end
 
 group :test do
