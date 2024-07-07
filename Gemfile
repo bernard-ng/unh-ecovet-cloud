@@ -34,6 +34,10 @@ end
 group :development do
   gem 'spring'
   gem 'web-console'
+  gem 'capistrano'
+  gem 'capistrano-rails'
+  gem 'capistrano-rvm'
+  gem 'capistrano3-puma'
 end
 
 group :test do
