@@ -23,11 +23,13 @@
         </ul>
       </td>
       <td>
-        <ul>
-          <% diagnostic.predictions.split(', ').each do |prediction| %>
-            <li><%= prediction %></li>
-          <% end %>
-        </ul>
+        <% unless diagnostic.predictions.nil? %>
+          <ul>
+            <% diagnostic.predictions.split(', ').each do |prediction| %>
+              <li><%= prediction %></li>
+            <% end %>
+          </ul>
+        <% end %>
       </td>
       <td class="tb-tnx-action">
         <%= link_to diagnostic, class: 'text-soft btn btn-icon btn-trigger', data: {turbo_method: :delete, turbo_confirm: 'êtes vous sûre ?'} do %>

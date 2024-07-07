@@ -16,7 +16,7 @@ export default class ImageController extends Controller
             data.append('file', file);
 
             try {
-                const url = document.head.querySelector(`meta[name="detection_model_url"]`).content
+                const url = 'https://ml.ecovet.cloud/detect'
                 const response = await fetch(url, {
                     method: 'POST',
                     body: data

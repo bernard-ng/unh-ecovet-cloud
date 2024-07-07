@@ -42,7 +42,7 @@ class DiagnosticsController < ApplicationController
     symptoms = prepare_symptoms(diagnostic)
     request = { features: symptoms }
     response = HTTParty.post(
-      ENV.fetch('PREDICTION_MODEL_URL', 'http://localhost:5000/predit'),
+      'https://ml.ecovet.cloud/predict',
       body: JSON.generate(request),
       headers: { 'Content-Type' => 'application/json' }
     )
