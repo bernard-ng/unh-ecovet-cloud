@@ -1,4 +1,11 @@
 # See https://git-scm.com/docs/gitattributes for more about git attribute files.
+public/* linguist-vendored
+assets/* linguist-vendored
+
+linguist-detectable=false
+
+*.css linguist-detectable=false
+*.scss linguist-detectable=false
 
 # Mark the database schema as having been generated.
 db/schema.rb linguist-generated
